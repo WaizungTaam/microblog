@@ -28,4 +28,13 @@
       {% include "_post.html" %}
     {%- endfor %}
   </div>
+  <div>
+    {%- if prev_url %}
+    <a href="{{ prev_url }}">Prev</a>
+    {%- endif %}
+    <span>{{ page }}</span>
+    {%- if next_url %}
+    <a href="{{ next_url }}">Next</a>
+    {%- endif %}
+  </div>
 {%- endblock %}

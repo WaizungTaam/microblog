@@ -2,9 +2,35 @@
 
 {%- block content %}
   <h1>Hi, {{ current_user.username }}!</h1>
+  {%- if form %}
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div>
+      <div>{{ form.post.label }}</div>
+      <div>{{ form.post(rows=4, cols=32) }}</div>
+      <div>
+        {%- for error in form.post.errors %}
+        <span style="color: red;">{{ error }}</span>
+        {%- endfor %}
+      </div>
+    </div>
+    <div>
+      {{ form.submit() }}
+    </div>
+  </form>
+  {%- endif %}
   <div>
   {%- for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% include "_post.html" %}
   {%- endfor %}
+  </div>
+  <div>
+    {%- if prev_url %}
+    <a href="{{ prev_url }}">Prev</a>
+    {%- endif %}
+    <span>{{ page }}</span>
+    {%- if next_url %}
+    <a href="{{ next_url }}">Next</a>
+    {%- endif %}
   </div>
 {%- endblock %}
